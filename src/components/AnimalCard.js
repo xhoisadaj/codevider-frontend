@@ -15,6 +15,7 @@ export const AnimalCard = ({ animal, apiPath }) => {
                         className="rounded-t-lg"
                         src={image || 'https://fakeimg.pl/500x500/cc7701'}
                         alt={name || 'Animal'}
+                        style={{ width: '500px', height: '500px' }}
                     />
                     <div className="p-5">
                         <Link to="#">

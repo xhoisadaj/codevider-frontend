@@ -120,6 +120,17 @@ export const Admin = () => {
 
         const { type, ...animal } = editingAnimal;
 
+        const handleImageChange = (e) => {
+            const file = e.target.files[0];
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                setEditingAnimal({ ...editingAnimal, image: reader.result });
+            };
+            if (file) {
+                reader.readAsDataURL(file);
+            }
+        };
+
         return (
             <div className="fixed inset-0 flex justify-center items-center bg-black bg-opacity-50 z-50">
                 <div className="bg-white p-6 rounded-lg max-w-md w-full">
@@ -130,12 +141,21 @@ export const Admin = () => {
                                 key !== '_id' && (
                                     <div key={key}>
                                         <label className="block text-sm font-medium text-gray-700">{formatColumnName(key)}</label>
-                                        <input
-                                            type="text"
-                                            value={animal[key]}
-                                            onChange={(e) => setEditingAnimal({ ...editingAnimal, [key]: e.target.value })}
-                                            className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                                        />
+                                        {key === 'image' ? (
+                                            <input
+                                                type="file"
+                                                accept="image/*"
+                                                onChange={handleImageChange}
+                                                className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                                            />
+                                        ) : (
+                                            <input
+                                                type="text"
+                                                value={animal[key]}
+                                                onChange={(e) => setEditingAnimal({ ...editingAnimal, [key]: e.target.value })}
+                                                className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                                            />
+                                        )}
                                     </div>
                                 )
                             ))}
@@ -156,7 +176,7 @@ export const Admin = () => {
                 <thead>
                     <tr>
                         {Object.keys(animals[0] || {}).map((key) => (
-                            key !== '_id' && key !== '__v' && <th key={key} className="py-2 px-4 border-b">{formatColumnName(key)}</th>
+                            key !== '_id' && key !== '__v' && key !== 'image' && <th key={key} className="py-2 px-4 border-b">{formatColumnName(key)}</th>
                         ))}
                         <th className="py-2 px-4 border-b">Actions</th>
                     </tr>
@@ -165,7 +185,7 @@ export const Admin = () => {
                     {animals.map((animal) => (
                         <tr key={animal._id} className="border-b">
                             {Object.keys(animal).map((key) => (
-                                key !== '_id' && key !== '__v' && <td key={key} className="py-2 px-4 border-b">{animal[key]}</td>
+                                key !== '_id' && key !== '__v' && key !== 'image' && <td key={key} className="py-2 px-4 border-b">{animal[key]}</td>
                             ))}
                             <td className="py-2 px-4 border-b">
                                 <button onClick={() => handleEdit(type, animal)} className="mr-2 bg-blue-500 text-white py-1 px-2 rounded hover:bg-blue-700 flex items-center">
@@ -183,7 +203,6 @@ export const Admin = () => {
             </table>
         </div>
     );
-    
 
     return (
         <div className="container mx-auto p-4">
@@ -204,4 +223,3 @@ export const Admin = () => {
         </div>
     );
 };
-

@@ -38,29 +38,29 @@ function Modal({ data, apiPath, setIsOpen }) {
 function BirdModal({ data }) {
   return (
     <div className="text-left text-xl">
-      <h1 className="mb-3 text-center text-3xl font-semibold uppercase tracking-widest">
+      <h1 className="mb-3 text-center text-3xl text-amber-600 font-semibold uppercase tracking-widest">
         {data.name}
       </h1>
       <p className="mb-3 font-medium italic">{data.description}</p>
 
       <div className="grid grid-cols-2 gap-4">
         <div>
-          <p className="font-semibold">Species:</p>
+          <p className="font-bold text-amber-600">Species:</p>
           <p>{data.species}</p>
         </div>
         <div>
-          <p className="font-semibold">Family:</p>
+          <p className="font-bold text-amber-600">Family:</p>
           <p>{data.family}</p>
         </div>
       </div>
 
       <div className="grid grid-cols-2 gap-4">
         <div>
-          <p className="font-semibold">Habitat:</p>
+          <p className="font-bold text-amber-600">Habitat:</p>
           <p>{data.habitat}</p>
         </div>
         <div>
-          <p className="font-semibold">Diet:</p>
+          <p className="font-bold text-amber-600">Diet:</p>
           <p>{data.diet}</p>
         </div>
       </div>
@@ -75,13 +75,13 @@ function BirdModal({ data }) {
 function CatModal({ data }) {
   return (
     <div className="text-left text-xl">
-      <h1 className="mb-3 text-center text-3xl font-semibold uppercase tracking-widest">
+      <h1 className="mb-3 text-center text-3xl text-amber-600 font-semibold uppercase tracking-widest">
         {data.name}
       </h1>
       <p className="mb-3 font-medium italic">{data.description}</p>
 
       <div>
-        <p className="font-semibold">Temperament:</p>
+        <p className="font-bold text-amber-600">Temperament:</p>
         <p>{data.temperament}</p>
       </div>
     </div>
@@ -91,35 +91,35 @@ function CatModal({ data }) {
 function DogModal({ data }) {
   return (
     <div className="text-left text-xl">
-      <h1 className="mb-3 text-center text-3xl font-semibold uppercase tracking-widest">
+      <h1 className="mb-3 text-center text-3xl text-amber-600 font-semibold uppercase tracking-widest">
         {data.name}
       </h1>
       <p className="mb-3 font-medium italic">{data.description}</p>
 
       <div className="grid grid-cols-2 gap-4">
         <div>
-          <p className="font-semibold">Lifespan:</p>
+          <p className="font-bold text-amber-600">Lifespan:</p>
           <p>{data.lifespan}</p>
         </div>
         <div>
-          <p className="font-semibold">Breed group:</p>
+          <p className="font-bold text-amber-600">Breed group:</p>
           <p>{data.breed_group}</p>
         </div>
       </div>
 
       <div className="grid grid-cols-2 gap-4">
         <div>
-          <p className="font-semibold">Size:</p>
+          <p className="font-bold text-amber-600">Size:</p>
           <p>{data.size}</p>
         </div>
         <div>
-          <p className="font-semibold">Colors:</p>
+          <p className="font-bold text-amber-600">Colors:</p>
           <p>{data.colors.join(', ')}</p>
         </div>
       </div>
 
       <div>
-        <p className="font-semibold">Temperament:</p>
+        <p className="font-bold text-amber-600">Temperament:</p>
         <p>{data.temperament}</p>
       </div>
     </div>

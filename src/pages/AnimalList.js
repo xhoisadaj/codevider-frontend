@@ -14,27 +14,29 @@ export const AnimalList = ({ apiPath }) => {
 
     const searchInputRef = useRef(null);
 
-  // Inside the useEffect hook for fetching data
+    // Inside the useEffect hook for fetching data
     useEffect(() => {
-    setIsLoading(true); // Set loading to true when fetching data
-    handleReset();
+        setIsLoading(true); // Set loading to true when fetching data
+        handleReset();
 
-    // When data is fetched successfully, set isLoading to false
-    if (animals.length > 0 || searchResults.length > 0) {
+        if (animals.length > 0) {
+            setIsLoading(false);
+        }
+    }, [apiPath, handleReset, animals.length]);
+
+    useEffect(() => {
+        if (queryTerm) {
+            setDisplayedAnimals(searchResults);
+            setDisplayedError(searchError);
+        } else {
+            setDisplayedAnimals(animals);
+            setDisplayedError(error);
+        }
         setIsLoading(false);
-    }
-    }, [apiPath, handleReset, animals.length, searchResults.length]);
-
-
-
-    useEffect(() => {
-        const displayedData = queryTerm ? searchResults : animals;
-        const nextIndex = showMore ? displayedAnimals.length + 9 : 9;
-        setDisplayedAnimals(displayedData.slice(0, nextIndex)); // Show first 9 animals initially or more if showMore is true
-        setDisplayedError(queryTerm ? searchError : error);
-    }, [queryTerm, searchResults, animals, searchError, error, showMore, displayedAnimals.length]);
+    }, [queryTerm, searchResults, searchError, animals, error]);
 
     const handleSearchAndClearInput = (event) => {
+        setIsLoading(true);
         handleSearch(event);
         if (searchInputRef.current) {
             searchInputRef.current.value = "";
@@ -44,6 +46,8 @@ export const AnimalList = ({ apiPath }) => {
     const handleToggleShowMore = () => {
         setShowMore(prevShowMore => !prevShowMore);
     };
+
+    const animalsToDisplay = showMore ? displayedAnimals : displayedAnimals.slice(0, 9);
 
     return (
         <main>
@@ -73,13 +77,11 @@ export const AnimalList = ({ apiPath }) => {
                     <>
                         {displayedError && <p className="text-red-500">{displayedError}</p>}
                         <div className='flex justify-center flex-wrap'>
-                        {displayedAnimals.map((animal, index) => (
-    <AnimalCard key={index} apiPath={apiPath} animal={animal} />
-))}
-
-
+                            {animalsToDisplay.map((animal, index) => (
+                                <AnimalCard key={index} apiPath={apiPath} animal={animal} />
+                            ))}
                         </div>
-                        {animals.length > 9 && (
+                        {displayedAnimals.length > 9 && (
                             <div className="flex justify-center mt-4">
                                 <button onClick={handleToggleShowMore} className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700">
                                     {showMore ? 'Show Less' : 'Show More'}

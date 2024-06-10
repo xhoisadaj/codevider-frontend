@@ -132,6 +132,7 @@ export const Admin = () => {
         };
 
         return (
+            <main>
             <div className="fixed inset-0 flex justify-center items-center bg-black bg-opacity-50 z-50">
                 <div className="bg-white p-6 rounded-lg max-w-md w-full">
                     <h2 className="text-2xl font-semibold mb-4">Edit {type.slice(0, -1)}</h2>
@@ -167,10 +168,12 @@ export const Admin = () => {
                     </form>
                 </div>
             </div>
+            </main>
         );
     };
 
     const renderTable = (animals, type) => (
+        <main>
         <div className="overflow-x-auto">
             <table className="min-w-full bg-white border">
                 <thead>
@@ -202,9 +205,11 @@ export const Admin = () => {
                 </tbody>
             </table>
         </div>
+        </main>
     );
 
     return (
+        <main>
         <div className="container mx-auto p-4">
             <h1 className="text-3xl font-bold mb-6 dark:text-white">Admin</h1>
             {renderEditForm()}
@@ -221,5 +226,6 @@ export const Admin = () => {
             <h2 className="text-2xl font-semibold mb-4 mt-8 dark:text-white">Birds</h2>
             {birds.length > 0 ? renderTable(birds, 'birds') : <p className="text-l font-semibold mb-4 dark:text-white">No birds available</p>}
         </div>
+        </main>
     );
 };

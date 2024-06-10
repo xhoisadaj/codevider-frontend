@@ -8,6 +8,7 @@ export const useSearch = (apiPath) => {
     const handleSearch = async (event) => {
         event.preventDefault();
         const query = event.target.search.value;
+        
         setQueryTerm(query);
 
         const externalUrl = `https://freetestapi.com/api/v1/${apiPath}?search=${query}`;
@@ -23,6 +24,7 @@ export const useSearch = (apiPath) => {
             const localData = await localResponse.json();
 
             const combinedData = [...externalData, ...localData];
+            
 
             if (combinedData.length === 0) {
                 setSearchError("WE FOUND NOTHING FOR YOU! SEARCH SOMETHING ELSE");
@@ -31,12 +33,13 @@ export const useSearch = (apiPath) => {
             }
             setSearchResults(combinedData);
         } catch (error) {
-            console.error("An error occurred while searching.", error);
+            
             setSearchError("An error occurred while searching.");
         }
     };
 
     const handleReset = useCallback(() => {
+        
         setQueryTerm("");
         setSearchResults([]);
         setSearchError("");
